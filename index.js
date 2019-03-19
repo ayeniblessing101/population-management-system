@@ -1,8 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
-import contactRoutes from './server/routes/contactRoutes';
-import smsRoutes from './server/routes/smsRoutes';
+import contactRoutes from './server/routes/locationRoutes';
 
 import './config/database';
 
@@ -13,8 +12,7 @@ require('dotenv').config();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
-app.use('/api/v1', contactRoutes);
-app.use('/api/v1', smsRoutes);
+app.use('/api/v1', locationRoutes);
 
 const port = process.env.PORT || 8080;
 
