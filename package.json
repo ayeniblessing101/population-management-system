@@ -9,8 +9,7 @@
     "serve": "node dist/index.js",
     "server:test": "mocha --require babel-register server/tests/**/*.js  --timeout 100000 --exit",
     "server:coverage": "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register server/tests/**/*.js --timeout 600000 --exit",
-    "coveralls":
-      "npm run server:coverage -- --report lcovonly && cat coverage/lcov.info | coveralls",
+    "coveralls": "npm run server:coverage -- --report lcovonly && cat coverage/lcov.info | coveralls",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -32,12 +31,13 @@
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
-    "express": "^4.16.4",
     "dotenv": "^7.0.0",
+    "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "mocha": "^6.0.2",
     "mongoose": "^4.13.5",
     "nyc": "^13.3.0",
+    "supertest": "^4.0.2",
     "validator": "^9.1.2"
   },
   "devDependencies": {
