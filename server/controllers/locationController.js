@@ -47,7 +47,8 @@ exports.getALocation = (req, res) => {
                         locationId: response._id,
                         name: response.name,
                         maleResidents: response.maleResidents,
-                        femaleResidents: response.femaleResidents
+                        femaleResidents: response.femaleResidents,
+                        TotalPopulation: Number(response.maleResidents + response.femaleResidents)
                     },
                 });
             }
@@ -60,10 +61,17 @@ exports.getALocation = (req, res) => {
 
 exports.getAllLocations = (req, res) => {
     Location.find()
-        .then((response) => {
-            if (response) {
+        .then((locations) => {
+            if (locations) {
+                const individualLocation = locations.map(location => ({
+                    _id: location._id,
+                    name: location.name,
+                    totalNumberOfMale: location.maleResidents,
+                    totalNumberOfFmale: location.femaleResidents,
+                    totalPoulation: Number(location.maleResidents + location.femaleResidents),
+                  }));
                 return res.status(200).json({
-                    locations: response
+                    individualLocation
                 });
             }
             return res.status(404).json({ message: 'No Locations Found' });
@@ -80,7 +88,8 @@ exports.updateLocation = (req, res) => {
     if (requestErrors) {
         res.status(400).json({ errors: requestErrors });
     } else {
-        Location.findByIdAndUpdate(
+        Location.findOneAndUpdate(
+            { _id: req.params._id },
             { 
                 $set: {
                     name: req.body.name,
@@ -90,26 +99,23 @@ exports.updateLocation = (req, res) => {
             },
             { new: true }
         )
-            .then((existingLocation) => {
-                if (existingLocation) {
-                    return res.status(409).json({
-                        error: 'Location with this name already exist',
-                    });
-                }
-                newLocation.save().then((locationDetail) => {
-                    return res.status(201).json({
-                        newLocation: {
-                            locationId: locationDetail._id,
-                            name: locationDetail.name,
-                            maleResidents: locationDetail.maleResidents,
-                            femaleResidents: locationDetail.femaleResidents
-                        },
-                        message: 'Location created successfully',
-                    });
+        .then((location, error) => {
+            if (location) {
+                return res.status(200).json({
+                    location: {
+                        locationId: location._id,
+                        name: location.name,
+                        maleResidents: location.maleResidents,
+                        femaleResidents: location.femaleResidents,
+                        TotalPopulation: Number(location.maleResidents + location.femaleResidents)
+                    },
+                    message: 'Location updated successfully'
                 });
-            })
+            }
+            return res.status(404).json({ error, message: 'Location not Found' });
+        })
         .catch((error) => {
-            return res.status(500).json({ error });
+            return res.status(500).json({ error, message: 'An Error occured' });
         });
     }
 };

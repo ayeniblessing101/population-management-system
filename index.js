@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
-import contactRoutes from './server/routes/locationRoutes';
+import locationRoutes from './server/routes/locationRoutes';
 
 import './config/database';
 
