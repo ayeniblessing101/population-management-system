@@ -7,10 +7,9 @@
     "start": "nodemon --exec babel-node index.js",
     "build": "babel src --out-dir dist",
     "serve": "node dist/index.js",
-    "server:test": "mocha --require babel-register server/tests/**/*.js  --timeout 100000 --exit",
+    "test": "mocha --require babel-register server/tests/**/*.js  --timeout 100000 --exit",
     "server:coverage": "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register server/tests/**/*.js --timeout 600000 --exit",
     "coveralls": "npm run server:coverage -- --report lcovonly && cat coverage/lcov.info | coveralls",
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
