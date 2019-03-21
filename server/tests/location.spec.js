@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 import supertest from 'supertest';
 import chai from 'chai';
 import Location from '../models/Location';
@@ -9,7 +10,11 @@ let newLocationId;
 
 describe('Location Controller', () => {
     before((done) => {
-        Location.remove({}).then(() => done());
+        mongoose.createConnection(process.env.DATABASE_TEST_URL, () => {
+          mongoose.connection.db.dropDatabase(() => {
+            done();
+          });
+        });
     });
 
 
