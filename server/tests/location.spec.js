@@ -10,11 +10,11 @@ let newLocationId;
 
 describe('Location Controller', () => {
     before((done) => {
-        mongoose.createConnection(process.env.DATABASE_TEST_URL, () => {
-          mongoose.connection.db.dropDatabase(() => {
-            done();
-          });
-        });
+        // mongoose.createConnection(process.env.DATABASE_TEST_URL, () => {
+        //   mongoose.connection.db.dropDatabase(() => {
+        //     done();
+        //   });
+        // });
     });
 
 
