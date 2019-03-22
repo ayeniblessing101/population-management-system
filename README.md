@@ -1,5 +1,6 @@
 # Population Management System
-
+[![Build Status](https://travis-ci.org/ayeniblessing101/population-management-system.svg?branch=master)](https://travis-ci.org/ayeniblessing101/population-management-system)
+[![Coverage Status](https://coveralls.io/repos/github/ayeniblessing101/population-management-system/badge.svg?branch=master)](https://coveralls.io/github/ayeniblessing101/population-management-system?branch=master)
 
 ## Introduction
 

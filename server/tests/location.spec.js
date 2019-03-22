@@ -9,16 +9,6 @@ const request = supertest(app);
 let newLocationId;
 
 describe('Location Controller', () => {
-    // const con = await mongoose.connect(process.env.DATABASE_TEST_URL, { useMongoClient: true });
-    // before((done) => {
-    //     console.log({ con })
-    //     con.connection.db.dropDatabase();
-    // });
-
-    // after((done) => {
-    //     con.close();
-    // });
-
     before((done) => {
         Location.remove({}).then(() => done());
     });
